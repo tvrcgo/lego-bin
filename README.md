@@ -1,2 +1,7 @@
 # lego-bin
-Lego
+Lego solution assistant.
+
+## Install
+```sh
+npm i lego-bin -g
+```
