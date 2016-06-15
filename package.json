@@ -1,0 +1,24 @@
+{
+  "name": "lego-bin",
+  "version": "0.0.1",
+  "description": "lego bin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tvrcgo/lego-bin.git"
+  },
+  "keywords": [
+    "lego",
+    "node.js",
+    "web"
+  ],
+  "author": "tvrcgo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tvrcgo/lego-bin/issues"
+  },
+  "homepage": "https://github.com/tvrcgo/lego-bin#readme"
+}
