@@ -1,77 +1,18 @@
 'use strict'
 
-const webpack = require('webpack')
-const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const webpackBaseConfig = require('./webpack.config.js')
 
-const APP_ROOT = process.cwd()
+webpackBaseConfig.output.path = 'dist'
 
-module.exports = {
-  entry: {
-    main: path.resolve(APP_ROOT, 'app/view/main.js')
+// Uglify Js Plugin
+const uglifyJsPlugin = new webpack.optimize.UglifyJsPlugin({
+  compress: {
+    warnings: false
   },
-  output: {
-    path: 'dist',
-    filename: '/app/public/[name].js'
-  },
-  resolve: {
-    root: [
-      path.resolve(APP_ROOT, 'app/view/component')
-    ],
-    extensions: ['', '.js', '.jsx', '.json'],
-    alias: {
-      '@com': path.resolve(APP_ROOT, 'app/view/component')
-    }
-  },
-  module: {
-    noParse: [],
-    loaders: [
-      {
-        test: /\.(js|jsx)$/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'stage-0', 'react']
-        },
-        include: [
-          path.resolve(APP_ROOT, 'app/view')
-        ],
-        exclude: ['node_modules']
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style!css!sass'
-      }
-    ],
-  },
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDom'
-  },
-  plugins: [
-    new CopyWebpackPlugin([
-      {
-        from: {
-          glob: 'app/**/*',
-          dot: false
-        },
-        ignore: 'app/view/**/*'
-      },
-      {
-        from: 'app/view/**/*.html'
-      },
-      {
-        from: 'app/view/lib',
-        to: 'app/public/lib',
-      },
-      { from: 'config/**/*' },
-      { from: '*' }
-    ], {
-      ignore: [
-        '**/node_modules/**/*',
-        'LICENSE',
-        'README.md',
-        '.*'
-      ]
-    })
-  ]
+  mangle: {
+    except: []
+  }
 }
+webpackBaseConfig.plugins.push(uglifyJsPlugin)
+
+module.exports = webpackBaseConfig

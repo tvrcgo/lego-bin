@@ -47,8 +47,8 @@ cli.launch({
       const distConfig = path.resolve(__dirname, '../config/webpack.config.dist.js')
       sh.exec(`webpack -d --config=${distConfig} --colors --progress`, { silent: false })
       sh.exec(`cd dist && npm i --production`, { silent: false })
-      const proj = require(path.join(process.cwd(), '/package.json'))
-      const packName = [proj.name, 'v'+proj.version, moment().format('YYYYMMDDHHmm')].join('_')
+      const tarPkg = require(path.join(process.cwd(), '/package.json'))
+      const packName = [tarPkg.name, 'v'+tarPkg.version, moment().format('YYYYMMDDHHmm')].join('_')
       break
     case 'clean':
       if (/win32/.test(process.platform)) {
